@@ -5,7 +5,7 @@
 //  Created by Reymundo Jr Guerrero on 5/26/26.
 //
 
-struct ExcerciseSet {
+struct ExerciseSet {
     var weight: Double?
     var reps: Int?
     
