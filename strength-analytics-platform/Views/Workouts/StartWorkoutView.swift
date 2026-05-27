@@ -60,7 +60,9 @@ struct StartWorkoutView: View {
                 .frame(maxWidth: .infinity)
             }
             .padding(.vertical, 15)
+            
             Divider()
+            
             HStack {
                 Text(workoutTitle)
                     .font(.title3)

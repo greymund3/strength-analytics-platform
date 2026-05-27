@@ -35,7 +35,7 @@ struct WorkoutsView: View {
             }
             .navigationTitle("Workout")
             .safeAreaInset(edge: .bottom) {
-                if let activeWorkoutStartedAt {
+                if let activeWorkoutStartedAt, !isWorkoutPresented {
                     ActiveWorkoutPill(
                         title: activeWorkoutTitle,
                         startedAt: activeWorkoutStartedAt
