@@ -38,7 +38,8 @@ struct WorkoutsView: View {
                 if let activeWorkoutStartedAt, !isWorkoutPresented {
                     ActiveWorkoutPill(
                         title: activeWorkoutTitle,
-                        startedAt: activeWorkoutStartedAt
+                        startedAt: activeWorkoutStartedAt,
+                        onCancelWorkout: cancelWorkout
                     ) {
                         isWorkoutPresented = true
                     }
@@ -67,6 +68,11 @@ struct WorkoutsView: View {
         }
 
         isWorkoutPresented = true
+    }
+
+    private func cancelWorkout() {
+        activeWorkoutStartedAt = nil
+        isWorkoutPresented = false
     }
 }
 
