@@ -54,10 +54,12 @@ struct WorkoutsView: View {
             if let activeWorkoutStartedAt {
                 StartWorkoutView(
                     workoutTitle: activeWorkoutTitle,
-                    startedAt: activeWorkoutStartedAt
-                ) {
-                    isWorkoutPresented = false
-                }
+                    startedAt: activeWorkoutStartedAt,
+                    onCollapse: {
+                        isWorkoutPresented = false
+                    },
+                    onCancelWorkout: cancelWorkout
+                )
             }
         }
     }

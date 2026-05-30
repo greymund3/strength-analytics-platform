@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct StartWorkoutView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
+    @State private var showCancelConfirmation:Bool = false
     let workoutTitle: String
     let startedAt: Date
     let onCollapse: () -> Void
+    let onCancelWorkout: () -> Void
 
     var body: some View {
         VStack {
@@ -70,10 +72,74 @@ struct StartWorkoutView: View {
                 Spacer()
             }
             .padding(.top, 8)
+            
+            VStack {
+                Image(systemName: "figure.strengthtraining.traditional")
+                    .font(.system(size:75))
+                    .padding(.vertical, 20)
+                Text("Get Started")
+                    .font(.headline)
+                Text("Add an excerise to start your workout")
+                    .font(.subheadline)
+                
+                HStack {
+                    Button(action:{
+                        
+                    }) {
+                        HStack {
+                            Image(systemName: "plus")
+                            Text("Add Exercise")
+                                .font(.headline)
+                        }
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                        .foregroundStyle(.white)
+                        .background(.black)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .padding(10)
+                    
+                    
+                    Button(action:{
+                        showCancelConfirmation = true
+
+                    }) {
+                        HStack {
+                            
+                            Text("Discard Workout")
+                                .font(.headline)
+                                .foregroundStyle(.red)
+                        }
+                        .padding(10)
+                        .frame(maxWidth: .infinity)
+                        .foregroundStyle(.white)
+                        .background(.black)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .padding(10)
+                    
+                    
+                }
+            }
             Spacer()
+            
+            
         }
         .padding()
         .navigationTitle("Log Workout")
+        .confirmationDialog(
+            "Cancel Workout?",
+            isPresented: $showCancelConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Cancel Workout", role: .destructive) {
+                onCancelWorkout()
+                dismiss()
+            }
+            Button("Keep Workout", role: .cancel) {}
+        } message: {
+            Text("This will remove the current empty workout.")
+        }
     }
 
     private func collapseWorkout() {
@@ -85,6 +151,8 @@ struct StartWorkoutView: View {
 #Preview {
     StartWorkoutView(
         workoutTitle: "Empty Workout",
-        startedAt: Date()
-    ) {}
+        startedAt: Date(),
+        onCollapse: {},
+        onCancelWorkout: {}
+    )
 }
