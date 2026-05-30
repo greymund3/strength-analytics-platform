@@ -9,7 +9,15 @@ import SwiftUI
 
 struct StartWorkoutView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var showCancelConfirmation:Bool = false
+    @State private var showCancelConfirmation: Bool = false
+    @State private var isExercisePickerPresented: Bool = false
+    @State private var workoutExercises: [Exercise] = []
+
+    let availableExercises: [Exercise] = [
+        Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false),
+        Exercise(name: "Squat", muscleGroups: "Legs", isUnilateral: false),
+        Exercise(name: "Dumbbell Row", muscleGroups: "Back", isUnilateral: true)
+    ]
     let workoutTitle: String
     let startedAt: Date
     let onCollapse: () -> Void
@@ -73,57 +81,66 @@ struct StartWorkoutView: View {
             }
             .padding(.top, 8)
             
-            VStack {
-                Image(systemName: "figure.strengthtraining.traditional")
-                    .font(.system(size:75))
-                    .padding(.vertical, 20)
-                Text("Get Started")
-                    .font(.headline)
-                Text("Add an excerise to start your workout")
-                    .font(.subheadline)
-                
-                HStack {
-                    Button(action:{
-                        
-                    }) {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Add Exercise")
-                                .font(.headline)
+            if workoutExercises.isEmpty {
+                VStack {
+                    Image(systemName: "figure.strengthtraining.traditional")
+                        .font(.system(size:75))
+                        .padding(.vertical, 20)
+                    Text("Get Started")
+                        .font(.headline)
+                    Text("Add an exercise to start your workout")
+                        .font(.subheadline)
+                    
+                    HStack {
+                        Button(action:{
+                            isExercisePickerPresented = true
+                        }) {
+                            HStack {
+                                Image(systemName: "plus")
+                                Text("Add Exercise")
+                                    .font(.headline)
+                            }
+                            .padding(10)
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(.white)
+                            .background(.black)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                         .padding(10)
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.white)
-                        .background(.black)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                    .padding(10)
-                    
-                    
-                    Button(action:{
-                        showCancelConfirmation = true
 
-                    }) {
-                        HStack {
-                            
-                            Text("Discard Workout")
-                                .font(.headline)
-                                .foregroundStyle(.red)
+                        Button(action:{
+                            showCancelConfirmation = true
+
+                        }) {
+                            HStack {
+                                
+                                Text("Discard Workout")
+                                    .font(.headline)
+                                    .foregroundStyle(.red)
+                            }
+                            .padding(10)
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(.white)
+                            .background(.black)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                         .padding(10)
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.white)
-                        .background(.black)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
-                    .padding(10)
-                    
-                    
                 }
+            } else {
+                List(workoutExercises) { exercise in
+                    VStack(alignment: .leading) {
+                        Text(exercise.name)
+                            .font(.headline)
+                        Text(exercise.muscleGroups)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .listStyle(.plain)
             }
+
             Spacer()
-            
-            
         }
         .padding()
         .navigationTitle("Log Workout")
@@ -139,6 +156,12 @@ struct StartWorkoutView: View {
             Button("Keep Workout", role: .cancel) {}
         } message: {
             Text("This will remove the current empty workout.")
+        }
+        .sheet(isPresented: $isExercisePickerPresented) {
+            ExercisePickerView(exercises: availableExercises) { exercise in
+                workoutExercises.append(exercise)
+                isExercisePickerPresented = false
+            }
         }
     }
 
