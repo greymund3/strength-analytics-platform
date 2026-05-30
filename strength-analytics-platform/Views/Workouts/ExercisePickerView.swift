@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ExercisePickerView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
     let exercises: [Exercise]
     let onSelectExercise: (Exercise) -> Void
-
     private var filteredExercises: [Exercise] {
         if searchText.isEmpty {
             return exercises
@@ -24,6 +24,7 @@ struct ExercisePickerView: View {
     }
     
     var body: some View {
+        
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 0) {
@@ -35,7 +36,26 @@ struct ExercisePickerView: View {
                 }
             }
             .navigationTitle("Add Exercise")
-            .searchable(text: $searchText, prompt: "Find exercise")
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Find exercise")
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    
+                        Button(action:{
+                            dismiss()
+                        }) {
+                            Text("Cancel")
+                        }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action:{
+                        
+                    }) {
+                        Text("Add")
+                    }
+                }
+            }
         }
     }
 }

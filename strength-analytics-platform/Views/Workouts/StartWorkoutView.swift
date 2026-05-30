@@ -157,7 +157,7 @@ struct StartWorkoutView: View {
         } message: {
             Text("This will remove the current empty workout.")
         }
-        .sheet(isPresented: $isExercisePickerPresented) {
+        .fullScreenCover(isPresented: $isExercisePickerPresented) {
             ExercisePickerView(exercises: availableExercises) { exercise in
                 workoutExercises.append(exercise)
                 isExercisePickerPresented = false
