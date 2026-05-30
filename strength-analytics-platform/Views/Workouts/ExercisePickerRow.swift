@@ -37,9 +37,9 @@ struct ExercisePickerRow: View {
             }
             .buttonStyle(.plain)
 
-            Button(action: {
-                
-            }) {
+            NavigationLink {
+                ExerciseDetailView(exercise: exercise)
+            } label: {
                 Image(systemName: "info.circle.fill")
                     .resizable()
                     .frame(width: 25, height: 25)
@@ -58,7 +58,9 @@ struct ExercisePickerRow: View {
 }
 
 #Preview {
-    ExercisePickerRow(
-        exercise: Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false)
-    ) {}
+    NavigationStack {
+        ExercisePickerRow(
+            exercise: Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false)
+        ) {}
+    }
 }

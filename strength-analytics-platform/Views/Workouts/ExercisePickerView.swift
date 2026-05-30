@@ -10,6 +10,7 @@ import SwiftUI
 struct ExercisePickerView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var searchText = ""
+
     let exercises: [Exercise]
     let onSelectExercise: (Exercise) -> Void
     private var filteredExercises: [Exercise] {
