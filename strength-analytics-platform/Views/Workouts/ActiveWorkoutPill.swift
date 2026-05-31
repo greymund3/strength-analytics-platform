@@ -25,13 +25,13 @@ struct ActiveWorkoutPill: View {
                         .foregroundStyle(.white)
                         .background(.black)
                         .clipShape(Circle())
-                    
+
                     VStack(alignment: .leading, spacing: 2) {
                         Text(title)
                             .font(.headline)
                             .fontWeight(.semibold)
                             .foregroundStyle(.primary)
-                        
+
                         TimelineView(.periodic(from: startedAt, by: 1)) { context in
                             Text(formattedWorkoutElapsedTime(from: startedAt, to: context.date))
                                 .font(.subheadline)
@@ -103,5 +103,5 @@ func formattedWorkoutElapsedTime(from startDate: Date, to currentDate: Date) -> 
         startedAt: Date(),
         onCancelWorkout: {}
     ) {}
-    .padding()
+        .padding()
 }

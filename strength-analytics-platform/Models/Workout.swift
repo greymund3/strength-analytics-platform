@@ -9,6 +9,5 @@ import Foundation
 
 struct Workout {
     let date: Date
-    var exercise : [WorkoutExercise]
+    var exercise: [WorkoutExercise]
 }
-

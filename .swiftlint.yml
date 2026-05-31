@@ -1,0 +1,49 @@
+included:
+  - strength-analytics-platform
+
+excluded:
+  - strength-analytics-platform.xcodeproj
+  - strength-analytics-platform/Assets.xcassets
+
+disabled_rules:
+  - trailing_whitespace
+  - line_length
+  - todo
+  - multiple_closures_with_trailing_closure
+  - trailing_comma
+
+opt_in_rules:
+  - empty_count
+  - force_unwrapping
+  - private_action
+  - private_outlet
+
+identifier_name:
+  min_length:
+    warning: 2
+  excluded:
+    - id
+
+type_name:
+  min_length:
+    warning: 3
+  max_length:
+    warning: 50
+
+function_body_length:
+  warning: 80
+  error: 140
+
+type_body_length:
+  warning: 250
+  error: 400
+
+file_length:
+  warning: 500
+  error: 900
+
+cyclomatic_complexity:
+  warning: 12
+  error: 20
+
+reporter: xcode

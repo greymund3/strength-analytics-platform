@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView{
+        TabView {
             Text("Placeholder-1")
                 .tabItem {
                     Label("Home", systemImage: "house")
@@ -17,25 +17,23 @@ struct ContentView: View {
             WorkoutsView()
                 .tabItem {
                     Label("Workout", systemImage: "figure.strengthtraining.traditional")
-            }
-            
+                }
+
             Text("Placeholder-3")
                 .tabItem {
                     Label("Progress", systemImage: "chart.line.uptrend.xyaxis")
                 }
-            
+
             Text("Placeholder-4")
                 .tabItem {
                     Label("Leaderboards", systemImage: "trophy")
                 }
-            
+
             Text("Placeholder-5")
                 .tabItem {
-                    Label("Profile", systemImage:"person.crop.circle")
+                    Label("Profile", systemImage: "person.crop.circle")
                 }
         }
-       
-        
     }
 }
 

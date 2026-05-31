@@ -16,7 +16,7 @@ struct StartWorkoutView: View {
     let availableExercises: [Exercise] = [
         Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false),
         Exercise(name: "Squat", muscleGroups: "Legs", isUnilateral: false),
-        Exercise(name: "Dumbbell Row", muscleGroups: "Back", isUnilateral: true)
+        Exercise(name: "Dumbbell Row", muscleGroups: "Back", isUnilateral: true),
     ]
     let workoutTitle: String
     let startedAt: Date
@@ -50,7 +50,7 @@ struct StartWorkoutView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                
+
                 VStack {
                     Text("Volume")
                         .font(.caption)
@@ -59,7 +59,7 @@ struct StartWorkoutView: View {
                         .monospacedDigit()
                 }
                 .frame(maxWidth: .infinity)
-                
+
                 VStack {
                     Text("Sets")
                         .font(.caption)
@@ -70,9 +70,9 @@ struct StartWorkoutView: View {
                 .frame(maxWidth: .infinity)
             }
             .padding(.vertical, 15)
-            
+
             Divider()
-            
+
             HStack {
                 Text(workoutTitle)
                     .font(.title3)
@@ -80,21 +80,21 @@ struct StartWorkoutView: View {
                 Spacer()
             }
             .padding(.top, 8)
-            
+
             if workoutExercises.isEmpty {
                 VStack {
                     Image(systemName: "figure.strengthtraining.traditional")
-                        .font(.system(size:75))
+                        .font(.system(size: 75))
                         .padding(.vertical, 20)
                     Text("Get Started")
                         .font(.headline)
                     Text("Add an exercise to start your workout")
                         .font(.subheadline)
-                    
+
                     workoutActionButtons
                 }
             } else {
-                VStack(spacing:0) {
+                VStack(spacing: 0) {
                     ForEach(workoutExercises) { exercise in
                         VStack(alignment: .leading) {
                             Text(exercise.name)
@@ -136,10 +136,10 @@ struct StartWorkoutView: View {
             }
         }
     }
-    
-    private var workoutActionButtons : some View {
+
+    private var workoutActionButtons: some View {
         HStack {
-            Button(action:{
+            Button(action: {
                 isExercisePickerPresented = true
             }) {
                 HStack {
@@ -155,12 +155,11 @@ struct StartWorkoutView: View {
             }
             .padding(10)
 
-            Button(action:{
+            Button(action: {
                 showCancelConfirmation = true
 
             }) {
                 HStack {
-                    
                     Text("Discard Workout")
                         .font(.headline)
                         .foregroundStyle(.red)

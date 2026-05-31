@@ -11,18 +11,18 @@ struct ExercisePickerRow: View {
     let exercise: Exercise
     let isSelected: Bool
     let action: () -> Void
-    
+
     var body: some View {
         HStack {
             Button(action: action) {
                 HStack {
-                    Image(systemName:"person")
+                    Image(systemName: "person")
                         .resizable()
                         .background(.red)
                         .scaledToFill()
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
-                        .shadow(radius:4)
+                        .shadow(radius: 4)
                         .foregroundStyle(.white)
 
                     VStack(alignment: .leading) {
@@ -60,7 +60,7 @@ struct ExercisePickerRow: View {
             .padding(10)
             .buttonStyle(.plain)
         }
-        .frame(maxWidth:.infinity)
+        .frame(maxWidth: .infinity)
         .padding(.vertical, 30)
         .padding(.horizontal, 15)
         .background(.black)

@@ -1,0 +1,16 @@
+--swiftversion 5.0
+--indent 4
+--maxwidth none
+--wraparguments before-first
+--wrapcollections before-first
+--trimwhitespace always
+--insertlines enabled
+--self remove
+--semicolons never
+--commas always
+--allman false
+--header ignore
+
+--exclude .git
+--exclude strength-analytics-platform.xcodeproj
+--exclude strength-analytics-platform/Assets.xcassets

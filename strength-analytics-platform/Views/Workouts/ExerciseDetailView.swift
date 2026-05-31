@@ -10,7 +10,7 @@ import SwiftUI
 struct ExerciseDetailView: View {
     let exercise: Exercise
     @State private var selectedTab: ExerciseDetailTab = .summary
-    
+
     var body: some View {
         VStack(spacing: 16) {
             Picker("Exercise Detail", selection: $selectedTab) {
@@ -43,7 +43,9 @@ private enum ExerciseDetailTab: String, CaseIterable, Identifiable {
     case howTo
     case history
 
-    var id: Self { self }
+    var id: Self {
+        self
+    }
 
     var title: String {
         switch self {

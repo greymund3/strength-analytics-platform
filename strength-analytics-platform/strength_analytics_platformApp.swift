@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct strength_analytics_platformApp: App {
+struct StrengthAnalyticsPlatformApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

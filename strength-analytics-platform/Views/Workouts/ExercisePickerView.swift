@@ -14,15 +14,15 @@ struct ExercisePickerView: View {
 
     let exercises: [Exercise]
     let onAddExercises: ([Exercise]) -> Void
-    
+
     private var selectedExercises: [Exercise] {
         exercises.filter { selectedExerciseIDs.contains($0.id) }
     }
-    
+
     private var hasSelectedExercises: Bool {
         !selectedExercises.isEmpty
     }
-    
+
     private var filteredExercises: [Exercise] {
         if searchText.isEmpty {
             return exercises
@@ -33,9 +33,8 @@ struct ExercisePickerView: View {
                 || exercise.muscleGroups.localizedCaseInsensitiveContains(searchText)
         }
     }
-    
+
     var body: some View {
-        
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 0) {
@@ -54,14 +53,12 @@ struct ExercisePickerView: View {
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Find exercise")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    
-                        Button(action:{
-                            dismiss()
-                        }) {
-                            Text("Cancel")
-                        }
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                    }
                 }
-                
             }
             .safeAreaInset(edge: .bottom) {
                 if hasSelectedExercises {
@@ -107,7 +104,7 @@ struct ExercisePickerView: View {
         exercises: [
             Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false),
             Exercise(name: "Squat", muscleGroups: "Legs", isUnilateral: false),
-            Exercise(name: "Dumbbell Row", muscleGroups: "Back", isUnilateral: true)
+            Exercise(name: "Dumbbell Row", muscleGroups: "Back", isUnilateral: true),
         ]
     ) { exercises in
         print("Selected \(exercises.map(\.name).joined(separator: ", "))")
