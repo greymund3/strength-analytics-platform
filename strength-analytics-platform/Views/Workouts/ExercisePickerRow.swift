@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExercisePickerRow: View {
     let exercise: Exercise
+    let isSelected: Bool
     let action: () -> Void
     
     var body: some View {
@@ -33,6 +34,17 @@ struct ExercisePickerRow: View {
                             .foregroundStyle(.gray)
                     }
                     Spacer()
+
+                    if isSelected {
+                        Text("Selected")
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .foregroundStyle(.black)
+                            .background(.green)
+                            .clipShape(Capsule())
+                    }
                 }
             }
             .buttonStyle(.plain)
@@ -52,15 +64,19 @@ struct ExercisePickerRow: View {
         .padding(.vertical, 30)
         .padding(.horizontal, 15)
         .background(.black)
-        
-        Divider()
+        .overlay {
+            Rectangle()
+                .stroke(isSelected ? .green : .clear, lineWidth: 2)
+        }
+        .animation(.snappy, value: isSelected)
     }
 }
 
 #Preview {
     NavigationStack {
         ExercisePickerRow(
-            exercise: Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false)
+            exercise: Exercise(name: "Bench Press", muscleGroups: "Chest", isUnilateral: false),
+            isSelected: true
         ) {}
     }
 }

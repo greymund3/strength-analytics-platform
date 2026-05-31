@@ -94,7 +94,7 @@ struct StartWorkoutView: View {
                     workoutActionButtons
                 }
             } else {
-                VStack(spacing: 12) {
+                VStack(spacing:0) {
                     ForEach(workoutExercises) { exercise in
                         VStack(alignment: .leading) {
                             Text(exercise.name)
@@ -131,9 +131,8 @@ struct StartWorkoutView: View {
             Text("This will remove the current empty workout.")
         }
         .fullScreenCover(isPresented: $isExercisePickerPresented) {
-            ExercisePickerView(exercises: availableExercises) { exercise in
-                workoutExercises.append(exercise)
-                isExercisePickerPresented = false
+            ExercisePickerView(exercises: availableExercises) { exercises in
+                workoutExercises.append(contentsOf: exercises)
             }
         }
     }
