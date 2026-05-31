@@ -91,53 +91,26 @@ struct StartWorkoutView: View {
                     Text("Add an exercise to start your workout")
                         .font(.subheadline)
                     
-                    HStack {
-                        Button(action:{
-                            isExercisePickerPresented = true
-                        }) {
-                            HStack {
-                                Image(systemName: "plus")
-                                Text("Add Exercise")
-                                    .font(.headline)
-                            }
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(.white)
-                            .background(.black)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                        }
-                        .padding(10)
-
-                        Button(action:{
-                            showCancelConfirmation = true
-
-                        }) {
-                            HStack {
-                                
-                                Text("Discard Workout")
-                                    .font(.headline)
-                                    .foregroundStyle(.red)
-                            }
-                            .padding(10)
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(.white)
-                            .background(.black)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                        }
-                        .padding(10)
-                    }
+                    workoutActionButtons
                 }
             } else {
-                List(workoutExercises) { exercise in
-                    VStack(alignment: .leading) {
-                        Text(exercise.name)
-                            .font(.headline)
-                        Text(exercise.muscleGroups)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                VStack(spacing: 12) {
+                    ForEach(workoutExercises) { exercise in
+                        VStack(alignment: .leading) {
+                            Text(exercise.name)
+                                .font(.headline)
+                            Text(exercise.muscleGroups)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(.gray.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                 }
-                .listStyle(.plain)
+
+                workoutActionButtons
             }
 
             Spacer()
@@ -162,6 +135,44 @@ struct StartWorkoutView: View {
                 workoutExercises.append(exercise)
                 isExercisePickerPresented = false
             }
+        }
+    }
+    
+    private var workoutActionButtons : some View {
+        HStack {
+            Button(action:{
+                isExercisePickerPresented = true
+            }) {
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Add Exercise")
+                        .font(.headline)
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .background(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+            .padding(10)
+
+            Button(action:{
+                showCancelConfirmation = true
+
+            }) {
+                HStack {
+                    
+                    Text("Discard Workout")
+                        .font(.headline)
+                        .foregroundStyle(.red)
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .background(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+            .padding(10)
         }
     }
 
